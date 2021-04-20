@@ -13,7 +13,7 @@ const userName = process.env.DB_USER;
 const pass = process.env.DB_PASS;
 const dbName = process.env.DB_Name;
 
-const uri = `mongodb+srv://${userName}:${pass}@cluster0.k1ugo.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.k1ugo.mongodb.net/${process.env.DB_Name}?retryWrites=true&w=majority`;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -22,10 +22,10 @@ app.use(fileUpload());
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
-    const serviceCollection = client.db(`${dbName}`).collection("services");
-    const bookingsCollection = client.db(`${dbName}`).collection("bookings");
-    const reviewsCollection = client.db(`${dbName}`).collection("reviews");
-    const adminCollection = client.db(`${dbName}`).collection("admin");
+    const serviceCollection = client.db(`${process.env.DB_Name}`).collection("services");
+    const bookingsCollection = client.db(`${process.env.DB_Name}`).collection("bookings");
+    const reviewsCollection = client.db(`${process.env.DB_Name}`).collection("reviews");
+    const adminCollection = client.db(`${process.env.DB_Name}`).collection("admin");
     // app.post('/addServices', (req, res) => {
     //     const services = req.body
     //     serviceCollection.insertMany(services, (err, result)=>{
@@ -126,4 +126,4 @@ app.get('/', (req, res) => {
     res.send('welcome');
 })
 
-app.listen(process.env.PORT || port);
+app.listen(process.env.PORT || port)
