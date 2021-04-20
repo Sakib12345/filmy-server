@@ -7,6 +7,7 @@ require('dotenv').config();
 const ObjectId = require('mongodb').ObjectId;
 const fileUpload = require('express-fileupload');
 const fs = require('fs-extra');
+const port = 5000;
 
 const userName = process.env.DB_USER;
 const pass = process.env.DB_PASS;
@@ -125,4 +126,4 @@ app.get('/', (req, res) => {
     res.send('welcome');
 })
 
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT || port);
