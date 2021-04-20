@@ -9,11 +9,9 @@ const fileUpload = require('express-fileupload');
 const fs = require('fs-extra');
 const port = 5000;
 
-const userName = process.env.DB_USER;
-const pass = process.env.DB_PASS;
-const dbName = process.env.DB_Name;
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.k1ugo.mongodb.net/${process.env.DB_Name}?retryWrites=true&w=majority`;
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.k1ugo.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -22,10 +20,10 @@ app.use(fileUpload());
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
-    const serviceCollection = client.db(`${process.env.DB_Name}`).collection("services");
-    const bookingsCollection = client.db(`${process.env.DB_Name}`).collection("bookings");
-    const reviewsCollection = client.db(`${process.env.DB_Name}`).collection("reviews");
-    const adminCollection = client.db(`${process.env.DB_Name}`).collection("admin");
+    const serviceCollection = client.db(`${process.env.DB_NAME}`).collection("services");
+    const bookingsCollection = client.db(`${process.env.DB_NAME}`).collection("bookings");
+    const reviewsCollection = client.db(`${process.env.DB_NAME}`).collection("reviews");
+    const adminCollection = client.db(`${process.env.DB_NAME}`).collection("admin");
     // app.post('/addServices', (req, res) => {
     //     const services = req.body
     //     serviceCollection.insertMany(services, (err, result)=>{
